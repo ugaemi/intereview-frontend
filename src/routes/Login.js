@@ -6,12 +6,31 @@ import {Button} from "baseui/button";
 import {KIND} from "baseui/app-nav-bar/constants";
 import {Block} from "baseui/block";
 import {StyledLink} from "baseui/link";
+import axios from "axios";
+import Home from "./Home";
 
 
 export default function Login() {
   const [css] = useStyletron();
-  const [usernameValue, setUsernameValue] = React.useState('');
-  const [passwordValue, setPasswordValue] = React.useState('');
+  const [username, setUsername] = React.useState("");
+  const [password, setPassword] = React.useState("");
+  const login = async () => {
+    try {
+      const response = await axios.post(
+        "http://localhost:8000/api/v1/accounts/sign-in",
+        {
+          "username": username,
+          "password": password,
+        }
+      );
+      if (response.status === 200) {
+        return <Home/>;
+      } else {
+        console.log(response.data);
+      }
+    } catch (e) {
+    }
+  }
   return (
     <div className={css({
       width: "500px",
@@ -27,8 +46,8 @@ export default function Login() {
         <FormControl label="Username">
           <Input
             id="username"
-            value={usernameValue}
-            onChange={event => setUsernameValue(event.currentTarget.value)}
+            value={username}
+            onChange={event => setUsername(event.currentTarget.value)}
             placeholder="아이디를 입력해주세요."
             maxLength="30"
           />
@@ -36,8 +55,8 @@ export default function Login() {
         <FormControl label="Password">
           <Input
             id="password"
-            value={passwordValue}
-            onChange={event => setPasswordValue(event.currentTarget.value)}
+            value={password}
+            onChange={event => setPassword(event.currentTarget.value)}
             type="password"
             placeholder="비밀번호를 입력해주세요."
             maxLength="30"
@@ -54,7 +73,7 @@ export default function Login() {
         <div>
           <Button className={css({
             width: "100%",
-          })}>로그인</Button>
+          })} onClick={event => login()}>로그인</Button>
           <Block marginBottom="scale500"/>
           <Button className={css({
             width: "100%",

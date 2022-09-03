@@ -1,7 +1,7 @@
 import React from "react";
-import Login from "./Login";
+import Header from "../components/Header";
 
 
 export default function Home() {
-  return <Login/>;
+  return <Header/>;
 }

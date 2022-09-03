@@ -16,7 +16,7 @@ class Header extends React.Component {
       <StyledNavigationList $align={ALIGN.center} />
       <StyledNavigationList $align={ALIGN.right}>
         <StyledNavigationItem>
-          <Button>로그인</Button>
+          <a href="/sign-in"><Button>로그인</Button></a>
         </StyledNavigationItem>
       </StyledNavigationList>
     </HeaderNavigation>;

@@ -30,6 +30,7 @@ export default function Login() {
             value={usernameValue}
             onChange={event => setUsernameValue(event.currentTarget.value)}
             placeholder="아이디를 입력해주세요."
+            maxLength="30"
           />
         </FormControl>
         <FormControl label="Password">
@@ -39,6 +40,7 @@ export default function Login() {
             onChange={event => setPasswordValue(event.currentTarget.value)}
             type="password"
             placeholder="비밀번호를 입력해주세요."
+            maxLength="30"
           />
         </FormControl>
         <div className={css({

@@ -7,8 +7,9 @@ import {Block} from "baseui/block";
 import {StyledLink} from "baseui/link";
 import axios from "axios";
 import {useState} from "react";
-import {setCookie} from "../utils/Cookies";
+import {getCookie, setCookie} from "../utils/Cookies";
 import {Navigate} from "react-router-dom";
+import {useCookies} from "react-cookie";
 
 
 export default function SignIn() {
@@ -16,6 +17,7 @@ export default function SignIn() {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [isLogin, setIsLogin] = useState(false);
+  const [cookies, setCookie, removeCookie] = useCookies();
 
   const handlerSignIn = async () => {
     try {
@@ -23,20 +25,21 @@ export default function SignIn() {
       formData.append("username", username);
       formData.append("password", password);
       axios.post(
-        "http://localhost:8000/api/v1/users/token",
+        "/api/v1/users/token",
         formData,
       )
         .then(res => {
           setCookie("token", res.data["token"], {sameSite: "none", secure: true});
-          axios.defaults.headers.common["Authorization"] = "Bearer " + res.data["token"];
+          axios.defaults.headers.common["Authorization"] = `Bearer ` + cookies.token;
           setIsLogin(true);
         })
         .catch(e => {
           console.log(e);
-          setCookie("token", null);
+          removeCookie("token");
         });
     } catch (e) {
       console.log(e);
+      removeCookie("token");
     }
   }
 

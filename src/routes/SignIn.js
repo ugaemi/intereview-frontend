@@ -15,7 +15,9 @@ export default function SignIn() {
   const [css] = useStyletron();
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
-  const [isLogin, setIsLogin] = useState();
+  const [usernameError, setUsernameError] = useState("");
+  const [passwordError, setPasswordError] = useState("");
+  const [isLogin, setIsLogin] = useState(false);
   const [cookies, setCookie, removeCookie] = useCookies();
 
   const handlerSignIn = async () => {
@@ -35,6 +37,10 @@ export default function SignIn() {
         .catch(e => {
           console.log(e);
           removeCookie("token");
+          if (e.response.status === 401) {
+            setUsernameError(e.response.data.detail);
+            setPasswordError(e.response.data.detail);
+          }
         });
     } catch (e) {
       console.log(e);
@@ -47,9 +53,10 @@ export default function SignIn() {
   } else {
     return (
       <div className={css({
-        margin: "0 auto",
         width: "350px",
-        marginTop: "25vh",
+        margin: "0 auto",
+        position: "relative",
+        top: `calc((100vh - 500px) / 2)`,
       })}>
         <div className={css({
           textAlign: "center",
@@ -57,25 +64,27 @@ export default function SignIn() {
           <h1>InteReview</h1>
         </div>
         <div>
-          <FormControl label="Username">
-            <Input
-              id="username"
-              value={username}
-              onChange={event => setUsername(event.currentTarget.value)}
-              placeholder="아이디를 입력해주세요."
-              maxLength="30"
-            />
-          </FormControl>
-          <FormControl label="Password">
-            <Input
-              id="password"
-              value={password}
-              onChange={event => setPassword(event.currentTarget.value)}
-              type="password"
-              placeholder="비밀번호를 입력해주세요."
-              maxLength="30"
-            />
-          </FormControl>
+          <form>
+            <FormControl label="Username" error={usernameError}>
+              <Input
+                id="username"
+                value={username}
+                onChange={event => setUsername(event.currentTarget.value)}
+                placeholder="아이디를 입력해주세요."
+                maxLength="30"
+              />
+            </FormControl>
+            <FormControl label="Password" error={passwordError}>
+              <Input
+                id="password"
+                value={password}
+                onChange={event => setPassword(event.currentTarget.value)}
+                type="password"
+                placeholder="비밀번호를 입력해주세요."
+                maxLength="30"
+              />
+            </FormControl>
+          </form>
           <div className={css({
             textAlign: "right",
           })}>

@@ -5,22 +5,25 @@ import {
   StyledNavigationList,
   StyledNavigationItem
 } from "baseui/header-navigation";
-import {Button} from "baseui/button";
+import {Button, KIND} from "baseui/button";
+import {useCookies} from "react-cookie";
 
-class Header extends React.Component {
-  render() {
-    return <HeaderNavigation>
-      <StyledNavigationList $align={ALIGN.left}>
-        <StyledNavigationItem>InteReview</StyledNavigationItem>
-      </StyledNavigationList>
-      <StyledNavigationList $align={ALIGN.center} />
-      <StyledNavigationList $align={ALIGN.right}>
-        <StyledNavigationItem>
-          <a href="/sign-in"><Button>로그인</Button></a>
-        </StyledNavigationItem>
-      </StyledNavigationList>
-    </HeaderNavigation>;
+export default function Header() {
+  const [cookies, setCookie, removeCookie] = useCookies();
+
+  const handlerSignOut = async () => {
+    removeCookie("token");
   }
-}
 
-export default Header;
+  return <HeaderNavigation>
+    <StyledNavigationList $align={ALIGN.left}>
+      <StyledNavigationItem>InteReview</StyledNavigationItem>
+    </StyledNavigationList>
+    <StyledNavigationList $align={ALIGN.center} />
+    <StyledNavigationList $align={ALIGN.right}>
+      <StyledNavigationItem>
+        <a href="/sign-in" onClick={event => handlerSignOut()}><Button kind={KIND.tertiary}>로그아웃</Button></a>
+      </StyledNavigationItem>
+    </StyledNavigationList>
+  </HeaderNavigation>;
+}

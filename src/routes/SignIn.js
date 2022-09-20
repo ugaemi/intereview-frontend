@@ -7,7 +7,6 @@ import {Block} from "baseui/block";
 import {StyledLink} from "baseui/link";
 import axios from "axios";
 import {useState} from "react";
-import {getCookie, setCookie} from "../utils/Cookies";
 import {Navigate} from "react-router-dom";
 import {useCookies} from "react-cookie";
 
@@ -16,7 +15,7 @@ export default function SignIn() {
   const [css] = useStyletron();
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
-  const [isLogin, setIsLogin] = useState(false);
+  const [isLogin, setIsLogin] = useState();
   const [cookies, setCookie, removeCookie] = useCookies();
 
   const handlerSignIn = async () => {
@@ -48,9 +47,9 @@ export default function SignIn() {
   } else {
     return (
       <div className={css({
-        width: "500px",
         margin: "0 auto",
-        height: "100%",
+        width: "350px",
+        marginTop: "25vh",
       })}>
         <div className={css({
           textAlign: "center",

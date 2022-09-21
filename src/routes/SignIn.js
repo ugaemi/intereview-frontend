@@ -5,10 +5,14 @@ import {Button} from "baseui/button";
 import {KIND} from "baseui/app-nav-bar/constants";
 import {Block} from "baseui/block";
 import {StyledLink} from "baseui/link";
-import axios from "axios";
 import {useState} from "react";
 import {Navigate} from "react-router-dom";
+import "./SignIn.css";
+import {useRecoilState} from "recoil";
+import {authAtom} from "../_state/Auth";
+import {useAuthAction} from "../_actions/Auth";
 import {useCookies} from "react-cookie";
+import axios from "axios";
 
 
 export default function SignIn() {
@@ -17,50 +21,32 @@ export default function SignIn() {
   const [password, setPassword] = useState("");
   const [usernameError, setUsernameError] = useState("");
   const [passwordError, setPasswordError] = useState("");
-  const [isLogin, setIsLogin] = useState(false);
   const [cookies, setCookie, removeCookie] = useCookies();
+  const [auth, setAuth] = useRecoilState(authAtom);
+  const authAction = useAuthAction();
 
-  const handlerSignIn = async () => {
-    try {
-      const formData = new FormData();
-      formData.append("username", username);
-      formData.append("password", password);
-      axios.post(
-        "/api/v1/users/token",
-        formData,
-      )
-        .then(res => {
-          setCookie("token", res.data["token"], {sameSite: "none", secure: true});
-          axios.defaults.headers.common["Authorization"] = `Bearer ` + cookies.token;
-          setIsLogin(true);
-        })
-        .catch(e => {
-          console.log(e);
-          removeCookie("token");
-          if (e.response.status === 401) {
-            setUsernameError(e.response.data.detail);
-            setPasswordError(e.response.data.detail);
-          }
-        });
-    } catch (e) {
+  function handlerSignIn() {
+    const formData = new FormData();
+    formData.append("username", username);
+    formData.append("password", password);
+    return authAction.signIn(formData).catch(e => {
       console.log(e);
       removeCookie("token");
-    }
+      axios.defaults.headers.common["Authorization"] = null;
+      setAuth(null);
+      if (e.response.status === 401) {
+        setUsernameError(e.response.data.detail);
+        setPasswordError(e.response.data.detail);
+      }
+    });
   }
 
-  if (isLogin) {
+  if (auth) {
     return <Navigate replace to={"/"}/>
   } else {
     return (
-      <div className={css({
-        width: "350px",
-        margin: "0 auto",
-        position: "relative",
-        top: `calc((100vh - 500px) / 2)`,
-      })}>
-        <div className={css({
-          textAlign: "center",
-        })}>
+      <div id="Login-form">
+        <div>
           <h1>InteReview</h1>
         </div>
         <div>

@@ -26,6 +26,18 @@ export default function SignIn() {
   const authAction = useAuthAction();
 
   function handlerSignIn() {
+    if (!username) {
+      setUsernameError("아이디를 입력해주세요.");
+      return false;
+    } else {
+      setUsernameError("");
+    }
+    if (!password) {
+      setPasswordError("비밀번호를 입력해주세요.");
+      return false;
+    } else {
+      setPasswordError("");
+    }
     const formData = new FormData();
     formData.append("username", username);
     formData.append("password", password);

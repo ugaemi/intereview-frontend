@@ -16,7 +16,7 @@ export function useAuthAction() {
 
   function signIn(formData) {
     return axios.post(
-      "/api/v1/users/token",
+      "/api/v1/accounts/token",
       formData,
     ).then(res => {
       setCookie("token", res.data["token"], {sameSite: "none", secure: true});

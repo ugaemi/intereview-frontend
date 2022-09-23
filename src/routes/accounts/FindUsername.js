@@ -1,17 +1,14 @@
 import {useStyletron} from "baseui";
 import {Button} from "baseui/button";
 import {Block} from "baseui/block";
-import {Navigate} from "react-router-dom";
 import "./SignIn.css";
-import {useRecoilState} from "recoil";
-import {authAtom} from "../../_state/Auth";
 import Banner from "../../components/Banner";
 import {Tabs, Tab, FILL} from "baseui/tabs-motion";
 import {useState} from "react";
 import {FormControl} from "baseui/form-control";
 import {Input} from "baseui/input";
 import "./FindAccount.css";
-import {PhoneInput} from "baseui/phone-input";
+import {COUNTRIES, PhoneInput} from "baseui/phone-input";
 
 
 export default function FindUsername() {
@@ -19,11 +16,33 @@ export default function FindUsername() {
   const [activeKey, setActiveKey] = useState("0");
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
-  const [country, setCountry] = useState(undefined);
+  const [country, setCountry] = useState(COUNTRIES.KR);
   const [phone, setPhone] = useState("");
   const [nameError, setNameError] = useState("");
   const [emailError, setEmailError] = useState("");
   const [phoneError, setPhoneError] = useState("");
+
+  function sendEmailVerificationCode() {
+    if (!name) {
+      setNameError("이름을 입력해주세요.");
+      return false;
+    } else {
+      setNameError("");
+    }
+    if (!email) {
+      setEmailError("이메일을 입력해주세요.");
+      return false;
+    } else {
+      setEmailError("");
+    }
+    const formData = new FormData();
+    formData.append("name", name);
+    formData.append("email", email);
+  }
+
+  function sendPhoneVerificationCode() {
+
+  }
 
   return (
     <div className={"CenterForm"}>
@@ -82,7 +101,8 @@ export default function FindUsername() {
       </Tabs>
       <Button className={css({
         width: "100%",
-      })}>인증코드 발송</Button>
+      })} onClick={event => activeKey === "0" ? sendEmailVerificationCode() : sendPhoneVerificationCode()}>
+        인증코드 발송</Button>
       <Block marginBottom="scale500"/>
     </div>
   );

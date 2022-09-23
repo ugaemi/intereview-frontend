@@ -25,7 +25,7 @@ export default function Header() {
         <a href="/mypage" onClick={event => handlerSignOut()}><Button kind={KIND.tertiary}>마이페이지</Button></a>
       </StyledNavigationItem>
       <StyledNavigationItem>
-        <a href="/sign-in" onClick={event => handlerSignOut()}><Button kind={KIND.tertiary}>로그아웃</Button></a>
+        <a href="/accounts/sign-in" onClick={event => handlerSignOut()}><Button kind={KIND.tertiary}>로그아웃</Button></a>
       </StyledNavigationItem>
     </StyledNavigationList>
   </HeaderNavigation>;

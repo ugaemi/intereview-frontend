@@ -7,5 +7,5 @@ import {useRecoilValue} from "recoil";
 
 export default function Home() {
   const auth = useRecoilValue(authAtom);
-  return {auth} ? <Header/> : <Navigate replace to={"/sign-in"}/>
+  return {auth} ? <Header/> : <Navigate replace to={"/accounts/sign-in"}/>
 }

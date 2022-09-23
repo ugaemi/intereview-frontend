@@ -7,6 +7,7 @@ import App from "./App";
 import {CookiesProvider} from "react-cookie";
 import axios from "axios";
 import {RecoilRoot} from "recoil";
+import "./index.css";
 
 const engine = new Styletron();
 

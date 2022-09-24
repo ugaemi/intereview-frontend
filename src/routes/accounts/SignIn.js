@@ -12,7 +12,7 @@ import {authAtom} from "../../_state/Auth";
 import {useAuthAction} from "../../_actions/Auth";
 import {useCookies} from "react-cookie";
 import axios from "axios";
-import Banner from "../../components/Banner";
+import Shortcut from "../../components/Shortcut";
 
 
 export default function SignIn() {
@@ -56,7 +56,7 @@ export default function SignIn() {
 
   return (
     <div className={"CenterForm"}>
-      <Banner/>
+      <Shortcut/>
       <form>
         <FormControl label="아이디" error={usernameError}>
           <Input
@@ -86,14 +86,10 @@ export default function SignIn() {
         </Link>
       </div>
       <Block marginBottom="scale500"/>
-      <div>
-        <Button className={css({
-          width: "100%",
-        })} onClick={event => handlerSignIn()}>로그인</Button>
+      <div className={"ButtonGroup"}>
+        <Button onClick={event => handlerSignIn()}>로그인</Button>
         <Block marginBottom="scale500"/>
-        <Button className={css({
-          width: "100%",
-        })} kind={KIND.secondary}>회원가입</Button>
+        <Button kind={KIND.secondary}>회원가입</Button>
         <Block marginBottom="scale500"/>
       </div>
     </div>

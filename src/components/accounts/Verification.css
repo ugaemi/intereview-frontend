@@ -1,0 +1,9 @@
+.CodeBannerArea div {
+    margin-left: 0;
+    margin-right: 0;
+    text-align: center;
+}
+
+div[data-baseweb="pin-code"] {
+    justify-content: center;
+}

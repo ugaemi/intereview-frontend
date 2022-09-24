@@ -1,13 +1,11 @@
-import {useStyletron} from "baseui";
 import {Button} from "baseui/button";
 import {Block} from "baseui/block";
 import {useNavigate} from "react-router-dom";
 import "./SignIn.css";
-import Banner from "../../components/Banner";
+import Shortcut from "../../components/Shortcut";
 
 
 export default function FindAccount() {
-  const [css] = useStyletron();
   const navigate = useNavigate();
 
   function handlerFindUsername() {
@@ -16,16 +14,12 @@ export default function FindAccount() {
 
   return (
     <div className={"CenterForm"}>
-      <Banner/>
+      <Shortcut/>
       <div>
-        <div>
-          <Button className={css({
-            width: "100%",
-          })} onClick={event => handlerFindUsername()}>아이디 찾기</Button>
+        <div className={"ButtonGroup"}>
+          <Button onClick={event => handlerFindUsername()}>아이디 찾기</Button>
           <Block marginBottom="scale500"/>
-          <Button className={css({
-            width: "100%",
-          })}>비밀번호 찾기</Button>
+          <Button>비밀번호 찾기</Button>
           <Block marginBottom="scale500"/>
         </div>
       </div>

@@ -5,6 +5,14 @@
     top: calc((100vh - 500px) / 2);
 }
 
-.CenterForm > div > h1 {
+#Shortcut {
     text-align: center;
+}
+
+#Shortcut a {
+    text-decoration: none;
+}
+
+.ButtonGroup Button {
+    width: 100%;
 }

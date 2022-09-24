@@ -1,4 +1,3 @@
-import {useStyletron} from "baseui";
 import {Button} from "baseui/button";
 import "./SignIn.css";
 import {Tabs, Tab, FILL} from "baseui/tabs-motion";
@@ -13,7 +12,6 @@ import Shortcut from "../../components/Shortcut";
 
 
 export default function FindUsername() {
-  const [css] = useStyletron();
   const [activeKey, setActiveKey] = useState("0");
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
@@ -59,7 +57,7 @@ export default function FindUsername() {
   }
 
   if (sendEmailCode) {
-    return <VerificationEmail email={email}/>
+    return <VerificationEmail email={email} name={name}/>
   } else {
     return (
       <div className={"CenterForm"}>

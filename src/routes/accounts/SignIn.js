@@ -1,8 +1,7 @@
 import {FormControl} from "baseui/form-control";
 import {Input} from "baseui/input";
 import {useStyletron} from "baseui";
-import {Button} from "baseui/button";
-import {KIND} from "baseui/app-nav-bar/constants";
+import {Button, KIND} from "baseui/button";
 import {Block} from "baseui/block";
 import {useState} from "react";
 import {Link, Navigate} from "react-router-dom";

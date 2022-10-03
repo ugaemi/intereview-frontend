@@ -42,7 +42,6 @@ export default function SignIn() {
     formData.append("username", username);
     formData.append("password", password);
     return authAction.signIn(formData).catch(e => {
-      console.log(e);
       removeCookie("token");
       axios.defaults.headers.common["Authorization"] = null;
       setAuth(null);

@@ -52,7 +52,7 @@ export default function VerificationEmail(props) {
   }
 
   function verificationCode() {
-    return accountAction.verificationCode({
+    return accountAction.verificationCodeForUsername({
       "platform": "email",
       "platform_data": props.email,
       "code": values.join(""),

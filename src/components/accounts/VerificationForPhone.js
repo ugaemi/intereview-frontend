@@ -52,7 +52,7 @@ export default function VerificationPhone(props) {
   }
 
   function verificationCode() {
-    return accountAction.verificationCode({
+    return accountAction.verificationCodeForUsername({
       "platform": "phone",
       "platform_data": props.phone,
       "code": values.join(""),

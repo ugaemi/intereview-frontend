@@ -11,6 +11,7 @@ import {useAccountAction} from "../../_actions/Account";
 export default function VerificationEmail(props) {
   const [values, setValues] = useState(["", "", "", "", "", ""]);
   const [valueError, setValueError] = useState(false);
+  const [valueSuccess, setValueSuccess] = useState(false);
   const [minutes, setMinutes] = useState(5);
   const [seconds, setSeconds] = useState(0);
   const accountAction = useAccountAction();
@@ -40,6 +41,8 @@ export default function VerificationEmail(props) {
     }).then(res => {
       setMinutes(5);
       setSeconds(0);
+      setValues(["", "", "", "", "", ""]);
+      setValueError(false);
     });
   }
 
@@ -48,7 +51,7 @@ export default function VerificationEmail(props) {
       "email": props.email,
       "code": values.join(""),
     }).then(res => {
-      console.log("success!");
+      setValueSuccess(true);
     }).catch(e => {
       if (e.response.status === 400) {
         setValueError(true);
@@ -72,6 +75,7 @@ export default function VerificationEmail(props) {
       clearOnEscape
       className={"Code"}
       error={valueError}
+      positive={valueSuccess}
     />
     <Block marginBottom="scale500"/>
     <div className={"ButtonGroup"}>

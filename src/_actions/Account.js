@@ -6,6 +6,7 @@ export function useAccountAction() {
     verificationCodeForUsername,
     sendResetPasswordLink,
     resetPassword,
+    signUp,
   }
 
   function findUsername(data) {
@@ -32,6 +33,13 @@ export function useAccountAction() {
   function resetPassword(data) {
     return axios.post(
       "/api/v1/accounts/reset/password",
+      data,
+    )
+  }
+
+  function signUp(data) {
+    return axios.post(
+      "/api/v1/accounts/",
       data,
     )
   }

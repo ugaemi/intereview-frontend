@@ -76,6 +76,11 @@ export default function SignIn() {
           />
         </FormControl>
       </form>
+      <Block marginBottom="scale800"/>
+      <div className={"ButtonGroup"}>
+        <Button onClick={event => handlerSignIn()}>로그인</Button>
+      </div>
+      <Block marginBottom="scale1000"/>
       <div className={css({
         textAlign: "right",
       })}>
@@ -84,11 +89,12 @@ export default function SignIn() {
         </Link>
       </div>
       <Block marginBottom="scale500"/>
-      <div className={"ButtonGroup"}>
-        <Button onClick={event => handlerSignIn()}>로그인</Button>
-        <Block marginBottom="scale500"/>
-        <Button>회원가입</Button>
-        <Block marginBottom="scale500"/>
+      <div className={css({
+        textAlign: "right",
+      })}>
+        <Link to={"/accounts/sign-up"}>
+          인터리뷰가 처음이신가요?
+        </Link>
       </div>
     </div>
   );

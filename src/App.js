@@ -5,12 +5,14 @@ import FindAccount from "./routes/accounts/FindAccount";
 import FindUsername from "./routes/accounts/FindUsername";
 import FindPassword from "./routes/accounts/FindPassword";
 import ResetPassword from "./routes/accounts/ResetPassword";
+import SignUp from "./routes/accounts/SignUp";
 
 export default function App() {
   return <div className="App">
     <BrowserRouter>
       <Routes>
         <Route exact path="/" element={<Home />}/>
+        <Route exact path="/accounts/sign-up" element={<SignUp/>}/>
         <Route exact path="/accounts/sign-in" element={<SignIn/>}/>
         <Route exact path="/accounts/find" element={<FindAccount/>}/>
         <Route exact path="/accounts/find/username" element={<FindUsername/>}/>

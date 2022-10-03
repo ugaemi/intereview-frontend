@@ -1,0 +1,18 @@
+.CenterForm {
+    width: 350px;
+    margin: 0 auto;
+    position: relative;
+    top: calc((100vh - 600px) / 2);
+}
+
+#Shortcut {
+    text-align: center;
+}
+
+#Shortcut a {
+    text-decoration: none;
+}
+
+.ButtonGroup Button {
+    width: 100%;
+}

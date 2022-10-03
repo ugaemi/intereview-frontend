@@ -10,6 +10,7 @@ import {useAccountAction} from "../../_actions/Account";
 
 export default function VerificationEmail(props) {
   const [values, setValues] = useState(["", "", "", "", "", ""]);
+  const [valueError, setValueError] = useState(false);
   const [minutes, setMinutes] = useState(5);
   const [seconds, setSeconds] = useState(0);
   const accountAction = useAccountAction();
@@ -32,9 +33,6 @@ export default function VerificationEmail(props) {
   }, [minutes, seconds]);
 
   function sendEmailVerificationCode() {
-    const formData = new FormData();
-    formData.append("name", props.name);
-    formData.append("email", props.email);
     return accountAction.findUsername({
       "platform": "email",
       "name": props.name,
@@ -43,6 +41,19 @@ export default function VerificationEmail(props) {
       setMinutes(5);
       setSeconds(0);
     });
+  }
+
+  function verificationCode() {
+    return accountAction.verificationCode({
+      "email": props.email,
+      "code": values.join(""),
+    }).then(res => {
+      console.log("success!");
+    }).catch(e => {
+      if (e.response.status === 400) {
+        setValueError(true);
+      }
+    })
   }
 
   return <div className={"CenterForm"}>
@@ -57,13 +68,14 @@ export default function VerificationEmail(props) {
     </div>
     <PinCode
       values={values}
-      onChange={({values}) => setValues(values)}
+      onChange={({ values }) => setValues(values)}
       clearOnEscape
       className={"Code"}
+      error={valueError}
     />
     <Block marginBottom="scale500"/>
     <div className={"ButtonGroup"}>
-      <Button>인증코드 입력</Button>
+      <Button onClick={event => verificationCode(props)}>인증코드 입력</Button>
       <Block marginBottom="scale500"/>
       <Button kind={BUTTON_KIND.secondary} onClick={event => sendEmailVerificationCode(props)}>인증코드 재발송</Button>
     </div>

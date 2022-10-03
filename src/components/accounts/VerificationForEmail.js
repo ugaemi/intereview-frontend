@@ -7,11 +7,12 @@ import {Block} from "baseui/block";
 import "./Verification.css";
 import {KIND as BUTTON_KIND} from "baseui/button";
 import {useAccountAction} from "../../_actions/Account";
+import ShowEmail from "./showEmail";
 
 export default function VerificationEmail(props) {
   const [values, setValues] = useState(["", "", "", "", "", ""]);
   const [valueError, setValueError] = useState(false);
-  const [valueSuccess, setValueSuccess] = useState(false);
+  const [username, setUsername] = useState("");
   const [minutes, setMinutes] = useState(5);
   const [seconds, setSeconds] = useState(0);
   const accountAction = useAccountAction();
@@ -51,7 +52,7 @@ export default function VerificationEmail(props) {
       "email": props.email,
       "code": values.join(""),
     }).then(res => {
-      setValueSuccess(true);
+      setUsername(res.data["username"]);
     }).catch(e => {
       if (e.response.status === 400) {
         setValueError(true);
@@ -59,29 +60,32 @@ export default function VerificationEmail(props) {
     })
   }
 
-  return <div className={"CenterForm"}>
-    <Shortcut/>
-    <div className={"CodeBannerArea"}>
-      <Banner
-        title={props.email}
-        kind={KIND.positive}
-      >
-        인증코드가 발송되었습니다. <br/><br/> {minutes}:{seconds < 10 ? `0${seconds}` : seconds}
-      </Banner>
-    </div>
-    <PinCode
-      values={values}
-      onChange={({ values }) => setValues(values)}
-      clearOnEscape
-      className={"Code"}
-      error={valueError}
-      positive={valueSuccess}
-    />
-    <Block marginBottom="scale500"/>
-    <div className={"ButtonGroup"}>
-      <Button onClick={event => verificationCode(props)}>인증코드 입력</Button>
+  if (username) {
+    return <ShowEmail username={username}/>
+  } else {
+    return <div className={"CenterForm"}>
+      <Shortcut/>
+      <div className={"CodeBannerArea"}>
+        <Banner
+          title={props.email}
+          kind={KIND.positive}
+        >
+          인증코드가 발송되었습니다. <br/><br/> {minutes}:{seconds < 10 ? `0${seconds}` : seconds}
+        </Banner>
+      </div>
+      <PinCode
+        values={values}
+        onChange={({ values }) => setValues(values)}
+        clearOnEscape
+        className={"Code"}
+        error={valueError}
+      />
       <Block marginBottom="scale500"/>
-      <Button kind={BUTTON_KIND.secondary} onClick={event => sendEmailVerificationCode(props)}>인증코드 재발송</Button>
+      <div className={"ButtonGroup"}>
+        <Button onClick={event => verificationCode(props)}>인증코드 입력</Button>
+        <Block marginBottom="scale500"/>
+        <Button kind={BUTTON_KIND.secondary} onClick={event => sendEmailVerificationCode(props)}>인증코드 재발송</Button>
+      </div>
     </div>
-  </div>
+  }
 }

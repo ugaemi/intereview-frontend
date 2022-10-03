@@ -21,6 +21,7 @@ export default function FindUsername() {
   const [emailError, setEmailError] = useState("");
   const [phoneError, setPhoneError] = useState("");
   const [sendEmailCode, setSendEmailCode] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
   const accountAction = useAccountAction();
 
   function sendEmailVerificationCode() {
@@ -39,6 +40,7 @@ export default function FindUsername() {
     const formData = new FormData();
     formData.append("name", name);
     formData.append("email", email);
+    setIsLoading(true);
     return accountAction.findUsername({
       "platform": "email",
       "name": name,
@@ -49,6 +51,8 @@ export default function FindUsername() {
       if (e.response.status === 404) {
         setEmailError(e.response.data.detail);
       }
+    }).finally(e => {
+      setIsLoading(false);
     });
   }
 
@@ -115,7 +119,8 @@ export default function FindUsername() {
           </Tab>
         </Tabs>
         <div className={"ButtonGroup"}>
-          <Button onClick={event => activeKey === "0" ? sendEmailVerificationCode() : sendPhoneVerificationCode()}>
+          <Button onClick={event => activeKey === "0" ? sendEmailVerificationCode() : sendPhoneVerificationCode()}
+                  isLoading={isLoading}>
             인증코드 발송</Button>
         </div>
       </div>

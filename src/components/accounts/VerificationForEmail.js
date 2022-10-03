@@ -15,6 +15,7 @@ export default function VerificationEmail(props) {
   const [username, setUsername] = useState("");
   const [minutes, setMinutes] = useState(5);
   const [seconds, setSeconds] = useState(0);
+  const [isLoading, setIsLoading] = useState(false);
   const accountAction = useAccountAction();
 
   useEffect(() => {
@@ -35,6 +36,7 @@ export default function VerificationEmail(props) {
   }, [minutes, seconds]);
 
   function sendEmailVerificationCode() {
+    setIsLoading(true);
     return accountAction.findUsername({
       "platform": "email",
       "name": props.name,
@@ -44,6 +46,8 @@ export default function VerificationEmail(props) {
       setSeconds(0);
       setValues(["", "", "", "", "", ""]);
       setValueError(false);
+    }).finally(e => {
+      setIsLoading(false);
     });
   }
 
@@ -84,7 +88,7 @@ export default function VerificationEmail(props) {
       <div className={"ButtonGroup"}>
         <Button onClick={event => verificationCode(props)}>인증코드 입력</Button>
         <Block marginBottom="scale500"/>
-        <Button kind={BUTTON_KIND.secondary} onClick={event => sendEmailVerificationCode(props)}>인증코드 재발송</Button>
+        <Button kind={BUTTON_KIND.secondary} onClick={event => sendEmailVerificationCode(props)} isLoading={isLoading}>인증코드 재발송</Button>
       </div>
     </div>
   }

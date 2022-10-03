@@ -1,10 +1,10 @@
 import {FormControl} from "baseui/form-control";
 import {Input} from "baseui/input";
 import {useStyletron} from "baseui";
-import {Button, KIND} from "baseui/button";
+import {Button} from "baseui/button";
 import {Block} from "baseui/block";
 import {useState} from "react";
-import {Link, Navigate} from "react-router-dom";
+import {Link} from "react-router-dom";
 import "./SignIn.css";
 import {useRecoilState} from "recoil";
 import {authAtom} from "../../_state/Auth";
@@ -88,7 +88,7 @@ export default function SignIn() {
       <div className={"ButtonGroup"}>
         <Button onClick={event => handlerSignIn()}>로그인</Button>
         <Block marginBottom="scale500"/>
-        <Button kind={KIND.secondary}>회원가입</Button>
+        <Button>회원가입</Button>
         <Block marginBottom="scale500"/>
       </div>
     </div>

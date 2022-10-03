@@ -9,6 +9,7 @@ import {COUNTRIES, PhoneInput} from "baseui/phone-input";
 import {useAccountAction} from "../../_actions/Account";
 import VerificationEmail from "../../components/accounts/VerificationForEmail";
 import Shortcut from "../../components/Shortcut";
+import VerificationPhone from "../../components/accounts/VerificationForPhone";
 
 
 export default function FindUsername() {
@@ -21,6 +22,7 @@ export default function FindUsername() {
   const [emailError, setEmailError] = useState("");
   const [phoneError, setPhoneError] = useState("");
   const [sendEmailCode, setSendEmailCode] = useState(false);
+  const [sendPhoneCode, setSendPhoneCode] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const accountAction = useAccountAction();
 
@@ -37,9 +39,6 @@ export default function FindUsername() {
     } else {
       setEmailError("");
     }
-    const formData = new FormData();
-    formData.append("name", name);
-    formData.append("email", email);
     setIsLoading(true);
     return accountAction.findUsername({
       "platform": "email",
@@ -57,11 +56,41 @@ export default function FindUsername() {
   }
 
   function sendPhoneVerificationCode() {
-
+    if (!name) {
+      setNameError("이름을 입력해주세요.");
+      return false;
+    } else {
+      setNameError("");
+    }
+    if (!phone) {
+      setPhoneError("휴대폰 번호를 입력해주세요.");
+      return false;
+    } else {
+      setPhoneError("");
+    }
+    setIsLoading(true);
+    return accountAction.findUsername({
+      "platform": "phone",
+      "name": name,
+      "platform_data": country.dialCode + phone,
+    }).then(res => {
+      setSendPhoneCode(true);
+    }).catch(e => {
+      if (e.response.status === 400) {
+        setPhoneError(e.response.data.detail);
+      }
+      if (e.response.status === 404) {
+        setPhoneError(e.response.data.detail);
+      }
+    }).finally(e => {
+      setIsLoading(false);
+    });
   }
 
   if (sendEmailCode) {
     return <VerificationEmail email={email} name={name}/>
+  } else if (sendPhoneCode) {
+    return <VerificationPhone phone={country.dialCode + phone} name={name}/>
   } else {
     return (
       <div className={"CenterForm"}>
@@ -107,12 +136,13 @@ export default function FindUsername() {
                   maxLength="20"
                 />
               </FormControl>
-              <FormControl label="휴대폰 번호" error={emailError}>
+              <FormControl label="휴대폰 번호" error={phoneError}>
                 <PhoneInput
                   country={country}
                   onCountryChange={({option}) => setCountry(option)}
                   text={phone}
                   onTextChange={e => setPhone(e.currentTarget.value)}
+                  error={phoneError}
                 />
               </FormControl>
             </form>

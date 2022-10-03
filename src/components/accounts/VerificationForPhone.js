@@ -9,7 +9,7 @@ import {KIND as BUTTON_KIND} from "baseui/button";
 import {useAccountAction} from "../../_actions/Account";
 import ShowEmail from "./ShowEmail";
 
-export default function VerificationEmail(props) {
+export default function VerificationPhone(props) {
   const [values, setValues] = useState(["", "", "", "", "", ""]);
   const [valueError, setValueError] = useState(false);
   const [username, setUsername] = useState("");
@@ -35,12 +35,12 @@ export default function VerificationEmail(props) {
     return () => clearInterval(countdown);
   }, [minutes, seconds]);
 
-  function sendEmailVerificationCode() {
+  function sendPhoneVerificationCode() {
     setIsLoading(true);
     return accountAction.findUsername({
-      "platform": "email",
+      "platform": "phone",
       "name": props.name,
-      "platform_data": props.email,
+      "platform_data": props.phone,
     }).then(res => {
       setMinutes(5);
       setSeconds(0);
@@ -53,8 +53,8 @@ export default function VerificationEmail(props) {
 
   function verificationCode() {
     return accountAction.verificationCode({
-      "platform": "email",
-      "platform_data": props.email,
+      "platform": "phone",
+      "platform_data": props.phone,
       "code": values.join(""),
     }).then(res => {
       setUsername(res.data["username"]);
@@ -89,7 +89,7 @@ export default function VerificationEmail(props) {
       <div className={"ButtonGroup"}>
         <Button onClick={event => verificationCode(props)}>인증코드 입력</Button>
         <Block marginBottom="scale500"/>
-        <Button kind={BUTTON_KIND.secondary} onClick={event => sendEmailVerificationCode(props)} isLoading={isLoading}>인증코드 재발송</Button>
+        <Button kind={BUTTON_KIND.secondary} onClick={event => sendPhoneVerificationCode(props)} isLoading={isLoading}>인증코드 재발송</Button>
       </div>
     </div>
   }

@@ -72,7 +72,7 @@ export default function VerificationPhone(props) {
       <Shortcut/>
       <div className={"CodeBannerArea"}>
         <Banner
-          title={props.email}
+          title={props.phone}
           kind={KIND.positive}
         >
           인증코드가 발송되었습니다. <br/><br/> {minutes}:{seconds < 10 ? `0${seconds}` : seconds}

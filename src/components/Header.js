@@ -6,13 +6,10 @@ import {
   StyledNavigationItem
 } from "baseui/header-navigation";
 import {Button, KIND} from "baseui/button";
-import {useCookies} from "react-cookie";
 
 export default function Header() {
-  const [cookies, setCookie, removeCookie] = useCookies();
-
   const handlerSignOut = async () => {
-    removeCookie("token");
+    localStorage.removeItem("user");
   }
 
   return <HeaderNavigation>
@@ -22,7 +19,7 @@ export default function Header() {
     <StyledNavigationList $align={ALIGN.center} />
     <StyledNavigationList $align={ALIGN.right}>
       <StyledNavigationItem>
-        <a href="/mypage" onClick={event => handlerSignOut()}><Button kind={KIND.tertiary}>마이페이지</Button></a>
+        <a href="/mypage"><Button kind={KIND.tertiary}>마이페이지</Button></a>
       </StyledNavigationItem>
       <StyledNavigationItem>
         <a href="/accounts/sign-in" onClick={event => handlerSignOut()}><Button kind={KIND.tertiary}>로그아웃</Button></a>

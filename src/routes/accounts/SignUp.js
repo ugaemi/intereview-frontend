@@ -3,7 +3,7 @@ import {Input} from "baseui/input";
 import {Button} from "baseui/button";
 import {Block} from "baseui/block";
 import {useState} from "react";
-import "./SignUp.css";
+import "./SignIn.css";
 import Shortcut from "../../components/Shortcut";
 import {COUNTRIES, PhoneInput} from "baseui/phone-input";
 import {useAccountAction} from "../../_actions/Account";

@@ -9,9 +9,9 @@ import "./SignIn.css";
 import {useRecoilState} from "recoil";
 import {authAtom} from "../../_state/Auth";
 import {useAuthAction} from "../../_actions/Auth";
-import {useCookies} from "react-cookie";
 import axios from "axios";
 import Shortcut from "../../components/Shortcut";
+import {clearErrors, showErrors} from "../../utils/Errors";
 
 
 export default function SignIn() {
@@ -21,36 +21,25 @@ export default function SignIn() {
   const [usernameError, setUsernameError] = useState("");
   const [passwordError, setPasswordError] = useState("");
   // eslint-disable-next-line
-  const [cookies, setCookie, removeCookie] = useCookies();
   const [auth, setAuth] = useRecoilState(authAtom);
   const authAction = useAuthAction();
+  console.log(auth);
+
+  const fieldErrors = {
+    "username": setUsernameError,
+    "password": setPasswordError,
+  }
 
   function handlerSignIn() {
     const formData = new FormData();
     formData.append("username", username);
     formData.append("password", password);
-    setUsernameError("");
-    setPasswordError("");
+    clearErrors(fieldErrors);
     return authAction.signIn(formData).catch(e => {
-      removeCookie("token");
+      localStorage.removeItem("user");
       axios.defaults.headers.common["Authorization"] = null;
       setAuth(null);
-      if (e.response.status === 401) {
-        setUsernameError(e.response.data.detail);
-        setPasswordError(e.response.data.detail);
-      }
-      else if (e.response.status === 422) {
-        e.response.data.detail.forEach((detail) => {
-          if (detail.type === "value_error.missing") {
-            if (detail.loc[1] === "username") {
-              setUsernameError("아이디를 입력해주세요.");
-            }
-            else if (detail.loc[1] === "password") {
-              setPasswordError("비밀번호를 입력해주세요.");
-            }
-          }
-        })
-      }
+      showErrors(e.response.data.detail, fieldErrors);
     });
   }
 

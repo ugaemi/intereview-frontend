@@ -4,7 +4,6 @@ import {BaseProvider, LightTheme} from 'baseui';
 import {Provider as StyletronProvider} from "styletron-react";
 import {Client as Styletron} from "styletron-engine-atomic";
 import App from "./App";
-import {CookiesProvider} from "react-cookie";
 import axios from "axios";
 import {RecoilRoot} from "recoil";
 import "./index.css";
@@ -20,11 +19,9 @@ const root = createRoot(rootElement);
 root.render(
   <StyletronProvider value={engine}>
     <BaseProvider theme={LightTheme}>
-      <CookiesProvider>
-        <RecoilRoot>
-          <App/>
-        </RecoilRoot>
-      </CookiesProvider>
+      <RecoilRoot>
+        <App/>
+      </RecoilRoot>
     </BaseProvider>
   </StyletronProvider>,
 );

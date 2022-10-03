@@ -13,6 +13,9 @@ export const showErrors = (data, fieldErrors) => {
     else if (detail.type === "value_error.email") {
       msg = "잘못된 이메일 형식입니다.";
     }
+    else if (detail.type === "value_error.missing") {
+      msg = "필수 항목입니다.";
+    }
     fieldErrors[detail.loc[1]](msg);
   });
 }

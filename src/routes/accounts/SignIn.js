@@ -26,21 +26,11 @@ export default function SignIn() {
   const authAction = useAuthAction();
 
   function handlerSignIn() {
-    if (!username) {
-      setUsernameError("아이디를 입력해주세요.");
-      return false;
-    } else {
-      setUsernameError("");
-    }
-    if (!password) {
-      setPasswordError("비밀번호를 입력해주세요.");
-      return false;
-    } else {
-      setPasswordError("");
-    }
     const formData = new FormData();
     formData.append("username", username);
     formData.append("password", password);
+    setUsernameError("");
+    setPasswordError("");
     return authAction.signIn(formData).catch(e => {
       removeCookie("token");
       axios.defaults.headers.common["Authorization"] = null;
@@ -48,6 +38,18 @@ export default function SignIn() {
       if (e.response.status === 401) {
         setUsernameError(e.response.data.detail);
         setPasswordError(e.response.data.detail);
+      }
+      else if (e.response.status === 422) {
+        e.response.data.detail.forEach((detail) => {
+          if (detail.type === "value_error.missing") {
+            if (detail.loc[1] === "username") {
+              setUsernameError("아이디를 입력해주세요.");
+            }
+            else if (detail.loc[1] === "password") {
+              setPasswordError("비밀번호를 입력해주세요.");
+            }
+          }
+        })
       }
     });
   }

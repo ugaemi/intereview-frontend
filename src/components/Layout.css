@@ -1,0 +1,21 @@
+main {
+    padding-top: 24px;
+    padding-inline-end: 64px;
+    padding-inline-start: 64px;
+    box-sizing: border-box;
+}
+
+main > div {
+    max-width: 800px;
+    margin: auto;
+}
+
+@media (max-width: 600px) {
+    main {
+        padding-inline-start: 16px;
+        padding-inline-end: 16px;
+    }
+    main > div {
+        max-width: 500px;
+    }
+}

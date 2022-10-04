@@ -2,6 +2,8 @@ import Header from "./Header";
 import {Navigate, Outlet} from "react-router-dom";
 import {useRecoilValue} from "recoil";
 import {authAtom} from "../_state/Auth";
+import "./Layout.css";
+import React from "react";
 
 export default function Layout() {
   const auth = useRecoilValue(authAtom);
@@ -9,7 +11,9 @@ export default function Layout() {
     return <div>
       <Header auth={auth}/>
       <main>
-        <Outlet/>
+        <div>
+          <Outlet/>
+        </div>
       </main>
     </div>
   } else {

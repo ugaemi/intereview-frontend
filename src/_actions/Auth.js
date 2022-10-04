@@ -18,7 +18,7 @@ export function useAuthAction() {
       formData,
     ).then(res => {
       localStorage.setItem("user", JSON.stringify(res.data));
-      axios.defaults.headers.common["Authorization"] = `Bearer ` + res.data["token"];
+      axios.defaults.headers.common["Authorization"] = `Bearer ` + res.data["access_token"];
       setAuth(res);
       navigate("/", {replace: true});
     });

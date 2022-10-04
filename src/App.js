@@ -8,11 +8,13 @@ import SignUp from "./routes/accounts/SignUp";
 import React from "react";
 import Home from "./routes/Home";
 import Layout from "./components/Layout";
+import Profile from "./routes/settings/Profile";
 
 export default function App() {
   return <Routes>
       <Route element={<Layout/>}>
         <Route path="/" element={<Home />}/>
+        <Route path="/settings/profile" element={<Profile />}/>
       </Route>
       <Route exact path="/accounts/sign-up" element={<SignUp/>}/>
       <Route exact path="/accounts/sign-in" element={<SignIn/>}/>

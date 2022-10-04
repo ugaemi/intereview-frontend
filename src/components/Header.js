@@ -1,29 +1,39 @@
 import * as React from "react";
-import {
-  HeaderNavigation,
-  ALIGN,
-  StyledNavigationList,
-  StyledNavigationItem
-} from "baseui/header-navigation";
-import {Button, KIND} from "baseui/button";
+import {AppNavBar, setItemActive} from "baseui/app-nav-bar";
+import {Delete, Overflow, Upload} from "baseui/icon";
+import {useNavigate} from "react-router-dom";
 
 export default function Header() {
-  const handlerSignOut = async () => {
-    localStorage.removeItem("user");
+  const navigate = useNavigate();
+  const [mainItems, setMainItems] = React.useState([
+    {
+      active: true,
+      label: "내 인터뷰",
+      navExitIcon: Delete,
+      children: [
+        { icon: Upload, label: "다가오는 일정", active: true },
+        { icon: Upload, label: "인터뷰 관리" }
+      ]
+    },
+  ]);
+
+  const handlerUserItemSelect = async (item) => {
+    if (item.label === "로그아웃") {
+      localStorage.removeItem("user");
+      navigate("/accounts/sign-in", {replace: true});
+    }
   }
 
-  return <HeaderNavigation>
-    <StyledNavigationList $align={ALIGN.left}>
-      <StyledNavigationItem>InteReview</StyledNavigationItem>
-    </StyledNavigationList>
-    <StyledNavigationList $align={ALIGN.center} />
-    <StyledNavigationList $align={ALIGN.right}>
-      <StyledNavigationItem>
-        <a href="/mypage"><Button kind={KIND.tertiary}>마이페이지</Button></a>
-      </StyledNavigationItem>
-      <StyledNavigationItem>
-        <a href="/accounts/sign-in" onClick={event => handlerSignOut()}><Button kind={KIND.tertiary}>로그아웃</Button></a>
-      </StyledNavigationItem>
-    </StyledNavigationList>
-  </HeaderNavigation>;
+  return <AppNavBar
+    title="InteReview"
+    mainItems={mainItems}
+    onMainItemSelect={item => {
+      setMainItems(prev => setItemActive(prev, item));
+    }}
+    username="Ugaemi"
+    userItems={[
+      { icon: Overflow, label: "로그아웃" },
+    ]}
+    onUserItemSelect={item => handlerUserItemSelect(item)}
+  />
 }

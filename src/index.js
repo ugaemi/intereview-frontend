@@ -7,6 +7,7 @@ import App from "./App";
 import axios from "axios";
 import {RecoilRoot} from "recoil";
 import "./index.css";
+import {BrowserRouter} from "react-router-dom";
 
 const engine = new Styletron();
 
@@ -20,7 +21,9 @@ root.render(
   <StyletronProvider value={engine}>
     <BaseProvider theme={LightTheme}>
       <RecoilRoot>
-        <App/>
+        <BrowserRouter>
+          <App/>
+        </BrowserRouter>
       </RecoilRoot>
     </BaseProvider>
   </StyletronProvider>,

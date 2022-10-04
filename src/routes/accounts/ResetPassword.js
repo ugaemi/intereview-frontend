@@ -1,12 +1,12 @@
 import {Button} from "baseui/button";
 import "./SignIn.css";
-import {useEffect, useState} from "react";
+import {useState} from "react";
 import {FormControl} from "baseui/form-control";
 import {Input} from "baseui/input";
 import "./FindAccount.css";
 import {useAccountAction} from "../../_actions/Account";
 import Shortcut from "../../components/Shortcut";
-import {useNavigate, useSearchParams} from "react-router-dom";
+import {useSearchParams} from "react-router-dom";
 import ResetPasswordDone from "../../components/accounts/ResetPasswordDone";
 
 

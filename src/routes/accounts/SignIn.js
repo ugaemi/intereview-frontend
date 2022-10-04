@@ -9,7 +9,6 @@ import "./SignIn.css";
 import {useRecoilState} from "recoil";
 import {authAtom} from "../../_state/Auth";
 import {useAuthAction} from "../../_actions/Auth";
-import axios from "axios";
 import Shortcut from "../../components/Shortcut";
 import {clearErrors, showErrors} from "../../utils/Errors";
 
@@ -36,9 +35,6 @@ export default function SignIn() {
     formData.append("password", password);
     clearErrors(fieldErrors);
     return authAction.signIn(formData).catch(e => {
-      localStorage.removeItem("user");
-      axios.defaults.headers.common["Authorization"] = null;
-      setAuth(null);
       showErrors(e.response.data.detail, fieldErrors);
     });
   }

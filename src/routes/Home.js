@@ -7,7 +7,6 @@ import {useRecoilValue} from "recoil";
 
 export default function Home() {
   const auth = useRecoilValue(authAtom);
-  console.log(auth);
   if (auth) {
     return <Header/>
   } else {

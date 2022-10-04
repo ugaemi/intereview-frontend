@@ -1,9 +1,9 @@
 import * as React from "react";
 import {AppNavBar, setItemActive} from "baseui/app-nav-bar";
-import {useNavigate} from "react-router-dom";
+import {useAuthAction} from "../_actions/Auth";
 
-export default function Header() {
-  const navigate = useNavigate();
+export default function Header(props) {
+  const authAction = useAuthAction();
   const [mainItems, setMainItems] = React.useState([
     {
       active: true,
@@ -24,8 +24,7 @@ export default function Header() {
 
   const handlerUserItemSelect = async (item) => {
     if (item.label === "로그아웃") {
-      localStorage.removeItem("user");
-      navigate("/accounts/sign-in", {replace: true});
+      return authAction.signOut();
     }
   }
 

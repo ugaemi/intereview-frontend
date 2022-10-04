@@ -7,10 +7,17 @@ export default function Header() {
   const [mainItems, setMainItems] = React.useState([
     {
       active: true,
+      label: "둘러보기",
+      children: [
+        { label: "인터뷰 후기", active: true },
+      ]
+    },
+    {
       label: "내 인터뷰",
       children: [
-        { label: "다가오는 일정", active: true },
-        { label: "인터뷰 관리" }
+        { label: "다가오는 일정" },
+        { label: "인터뷰 관리" },
+        { label: "이력 관리" },
       ]
     },
   ]);

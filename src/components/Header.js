@@ -1,6 +1,5 @@
 import * as React from "react";
 import {AppNavBar, setItemActive} from "baseui/app-nav-bar";
-import {Delete, Overflow, Upload} from "baseui/icon";
 import {useNavigate} from "react-router-dom";
 
 export default function Header() {
@@ -9,10 +8,9 @@ export default function Header() {
     {
       active: true,
       label: "내 인터뷰",
-      navExitIcon: Delete,
       children: [
-        { icon: Upload, label: "다가오는 일정", active: true },
-        { icon: Upload, label: "인터뷰 관리" }
+        { label: "다가오는 일정", active: true },
+        { label: "인터뷰 관리" }
       ]
     },
   ]);
@@ -32,7 +30,7 @@ export default function Header() {
     }}
     username="Ugaemi"
     userItems={[
-      { icon: Overflow, label: "로그아웃" },
+      { label: "로그아웃" },
     ]}
     onUserItemSelect={item => handlerUserItemSelect(item)}
   />

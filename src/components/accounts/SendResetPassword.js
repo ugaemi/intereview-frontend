@@ -50,12 +50,12 @@ export default function SendResetPassword(props) {
         title={props.email}
         kind={KIND.positive}
       >
-        비밀번호 재설정 링크가 발송되었습니다. <br/><br/> {minutes}:{seconds < 10 ? `0${seconds}` : seconds}
+        비밀번호 재설정 링크가 발송되었어요. <br/><br/> {minutes}:{seconds < 10 ? `0${seconds}` : seconds}
       </Banner>
     </div>
     <Block marginBottom="scale500"/>
     <div className={"ButtonGroup"}>
-      <Button kind={BUTTON_KIND.secondary} onClick={event => sendEmailVerificationCode(props)} isLoading={isLoading}>비밀번호 재설정 링크 재발송</Button>
+      <Button kind={BUTTON_KIND.secondary} onClick={event => sendEmailVerificationCode(props)} isLoading={isLoading}>링크 다시 보내기</Button>
     </div>
   </div>
 }

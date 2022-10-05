@@ -21,9 +21,9 @@ export default function FindAccount() {
       <Shortcut/>
       <div>
         <div className={"ButtonGroup"}>
-          <Button onClick={event => handlerFindUsername()}>아이디 찾기</Button>
+          <Button onClick={event => handlerFindUsername()}>아이디를 찾을래요</Button>
           <Block marginBottom="scale500"/>
-          <Button onClick={event => handlerResetPassword()}>비밀번호 재설정</Button>
+          <Button onClick={event => handlerResetPassword()}>비밀번호를 다시 설정할래요</Button>
           <Block marginBottom="scale500"/>
         </div>
       </div>

@@ -1,12 +1,17 @@
 import axios from "axios";
+import {useAuthAction} from "./Auth";
 
 export function useAccountAction() {
+  const authAction = useAuthAction();
+
   return {
     findUsername,
     verificationCodeForUsername,
     sendResetPasswordLink,
     resetPassword,
     signUp,
+    fetchBaseData,
+    withdraw,
   }
 
   function findUsername(data) {
@@ -42,5 +47,20 @@ export function useAccountAction() {
       "/api/v1/accounts/",
       data,
     )
+  }
+
+  function fetchBaseData() {
+    return axios.get(
+      "/api/v1/accounts",
+    )
+  }
+
+  function withdraw(data) {
+    return axios.post(
+      "/api/v1/accounts/withdraw",
+      data,
+    ).then(res => {
+      authAction.signOut();
+    })
   }
 }

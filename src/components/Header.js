@@ -32,7 +32,7 @@ export default function Header(props) {
   ]);
 
   const handlerUserItemSelect = async (item) => {
-    if (item.label === "로그아웃") {
+    if (item.label === "나가기") {
       return authAction.signOut();
     }
   }
@@ -49,7 +49,7 @@ export default function Header(props) {
     onMainItemSelect={item => handlerMainItemSelect(item)}
     username={props.auth.username}
     userItems={[
-      { label: "로그아웃" },
+      { label: "나가기" },
     ]}
     onUserItemSelect={item => handlerUserItemSelect(item)}
   />

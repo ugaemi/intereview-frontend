@@ -77,7 +77,7 @@ export default function ResetPassword() {
           </FormControl>
         </form>
         <div className={"ButtonGroup"}>
-          <Button onClick={event => resetPassword()}>비밀번호 재설정</Button>
+          <Button onClick={event => resetPassword()}>비밀번호 업데이트</Button>
         </div>
       </div>
     )

@@ -15,7 +15,7 @@ export default function ResetPasswordDone(props) {
         title={props.username}
         kind={KIND.positive}
       >
-        🎉 비밀번호 재설정에 성공했습니다 🎉 <br/>
+        🎉 비밀번호 재설정에 성공했어요 🎉 <br/>
       </Banner>
     </div>
     <Block marginBottom="scale500"/>
@@ -23,7 +23,7 @@ export default function ResetPasswordDone(props) {
       textAlign: "right",
     })}>
       <Link to={"/accounts/sign-in"}>
-        로그인하러가기
+        들어가기
       </Link>
     </div>
   </div>

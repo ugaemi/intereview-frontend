@@ -151,7 +151,7 @@ export default function FindUsername() {
         <div className={"ButtonGroup"}>
           <Button onClick={event => activeKey === "0" ? sendEmailVerificationCode() : sendPhoneVerificationCode()}
                   isLoading={isLoading}>
-            인증코드 발송</Button>
+            인증코드 발송하기</Button>
         </div>
       </div>
     )

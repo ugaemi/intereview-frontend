@@ -65,14 +65,14 @@ export default function SignIn() {
       </form>
       <Block marginBottom="scale800"/>
       <div className={"ButtonGroup"}>
-        <Button onClick={event => handlerSignIn()}>로그인</Button>
+        <Button onClick={event => handlerSignIn()}>들어가기</Button>
       </div>
       <Block marginBottom="scale1000"/>
       <div className={css({
         textAlign: "right",
       })}>
         <Link to={"/accounts/find"}>
-          아이디/비밀번호를 잊어버리셨나요?
+          아이디/비밀번호가 생각이 안나요
         </Link>
       </div>
       <Block marginBottom="scale500"/>
@@ -80,7 +80,7 @@ export default function SignIn() {
         textAlign: "right",
       })}>
         <Link to={"/accounts/sign-up"}>
-          인터리뷰가 처음이신가요?
+          인터리뷰가 처음이에요
         </Link>
       </div>
     </div>

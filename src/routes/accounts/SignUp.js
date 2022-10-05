@@ -60,7 +60,7 @@ export default function SignUp() {
           title={name + "님"}
           kind={KIND.positive}
         >
-          🎉 인터리뷰에 오신 것을 환영합니다 🎉 <br/>
+          🎉 인터리뷰에 오신 것을 환영해요 🎉 <br/>
         </Banner>
       </div>
       <Block marginBottom="scale500"/>
@@ -68,7 +68,7 @@ export default function SignUp() {
         textAlign: "right",
       })}>
         <Link to={"/accounts/sign-in"}>
-          로그인하러가기
+          들어가기
         </Link>
       </div>
     </div>
@@ -127,7 +127,7 @@ export default function SignUp() {
         </form>
         <Block marginBottom="scale800"/>
         <div className={"ButtonGroup"}>
-          <Button onClick={event => handlerSignUp(event)}>회원가입</Button>
+          <Button onClick={event => handlerSignUp(event)}>함께하기</Button>
         </div>
       </div>
     );

@@ -8,6 +8,7 @@ import axios from "axios";
 import {RecoilRoot} from "recoil";
 import "./index.css";
 import {BrowserRouter} from "react-router-dom";
+import { GoogleOAuthProvider } from '@react-oauth/google';
 
 const engine = new Styletron();
 
@@ -25,13 +26,15 @@ axios.interceptors.request.use(function (config) {
 
 const root = createRoot(rootElement);
 root.render(
-  <StyletronProvider value={engine}>
-    <BaseProvider theme={LightTheme}>
-      <RecoilRoot>
-        <BrowserRouter>
-          <App/>
-        </BrowserRouter>
-      </RecoilRoot>
-    </BaseProvider>
-  </StyletronProvider>,
+  <GoogleOAuthProvider clientId={process.env.REACT_APP_GOOGLE_OAUTH_CLIENT_ID}>
+    <StyletronProvider value={engine}>
+      <BaseProvider theme={LightTheme}>
+          <RecoilRoot>
+            <BrowserRouter>
+              <App/>
+            </BrowserRouter>
+          </RecoilRoot>
+      </BaseProvider>
+    </StyletronProvider>
+  </GoogleOAuthProvider>
 );

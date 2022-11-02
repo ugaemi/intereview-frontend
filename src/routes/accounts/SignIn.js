@@ -11,7 +11,7 @@ import {authAtom} from "../../_state/Auth";
 import {useAuthAction} from "../../_actions/Auth";
 import Shortcut from "../../components/Shortcut";
 import {clearErrors, showErrors} from "../../utils/Errors";
-import GoogleLoginButton from "../../components/accounts/GoogleLoginButton";
+import {useGoogleOneTapLogin} from '@react-oauth/google';
 
 
 export default function SignIn() {
@@ -39,6 +39,15 @@ export default function SignIn() {
       showErrors(e.response.data.detail, fieldErrors);
     });
   }
+
+  useGoogleOneTapLogin({
+    onSuccess: credentialResponse => {
+      console.log(credentialResponse);
+    },
+    onError: () => {
+      console.log('Login Failed');
+    },
+  });
 
   return (
     <div className={"CenterForm"}>
@@ -74,7 +83,7 @@ export default function SignIn() {
         textAlign: "right",
       })}>
         <Link to={"/accounts/find"}>
-          아이디/비밀번호가 생각이 안나요
+          아이디/비밀번호가 기억이 안나요
         </Link>
       </div>
       <Block marginBottom="scale500"/>

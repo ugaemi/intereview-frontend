@@ -11,6 +11,7 @@ import {authAtom} from "../../_state/Auth";
 import {useAuthAction} from "../../_actions/Auth";
 import Shortcut from "../../components/Shortcut";
 import {clearErrors, showErrors} from "../../utils/Errors";
+import GoogleLoginButton from "../../components/accounts/GoogleLoginButton";
 
 
 export default function SignIn() {
@@ -66,6 +67,7 @@ export default function SignIn() {
       <Block marginBottom="scale800"/>
       <div className={"ButtonGroup"}>
         <Button onClick={event => handlerSignIn()}>들어가기</Button>
+        <Block marginBottom="scale500"/>
       </div>
       <Block marginBottom="scale1000"/>
       <div className={css({

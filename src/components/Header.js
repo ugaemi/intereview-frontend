@@ -19,7 +19,7 @@ export default function Header(props) {
       children: [
         { label: "다가오는 일정" },
         { label: "인터뷰 관리" },
-        { label: "이력 관리" },
+        { label: "커리어 관리" },
       ]
     },
     {

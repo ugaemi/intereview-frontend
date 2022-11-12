@@ -10,11 +10,15 @@ import Home from "./routes/Home";
 import Layout from "./components/Layout";
 import Profile from "./routes/settings/Profile";
 import Account from "./routes/settings/Account";
+import Career from "./routes/career/Career";
+import CareerManagement from "./routes/career/CareerManagement";
 
 export default function App() {
   return <Routes>
       <Route element={<Layout/>}>
         <Route path="/" element={<Home />}/>
+        <Route path="/career" element={<Career />}/>
+        <Route path="/career/management" element={<CareerManagement />}/>
         <Route path="/settings/profile" element={<Profile />}/>
         <Route path="/settings/account" element={<Account />}/>
       </Route>

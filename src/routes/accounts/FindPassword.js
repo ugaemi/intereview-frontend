@@ -11,35 +11,35 @@ import SendResetPassword from "../../components/accounts/SendResetPassword";
 
 export default function FindPassword() {
   const [username, setUsername] = useState("");
-  const [email, setEmail] = useState("");
+  const [name, setName] = useState("");
   const [usernameError, setUsernameError] = useState("");
-  const [emailError, setEmailError] = useState("");
+  const [nameError, setNameError] = useState("");
   const [sendEmail, setSendEmail] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const accountAction = useAccountAction();
 
   function sendResetPasswordEmail() {
+    if (!name) {
+      setNameError("이름을 입력해주세요.");
+      return false;
+    } else {
+      setNameError("");
+    }
     if (!username) {
-      setUsernameError("이름을 입력해주세요.");
+      setUsernameError("아이디(이메일)를 입력해주세요.");
       return false;
     } else {
       setUsernameError("");
     }
-    if (!email) {
-      setEmailError("이메일을 입력해주세요.");
-      return false;
-    } else {
-      setEmailError("");
-    }
     setIsLoading(true);
     return accountAction.sendResetPasswordLink({
+      "name": name,
       "username": username,
-      "email": email,
     }).then(res => {
       setSendEmail(true);
     }).catch(e => {
       if (e.response.status === 422) {
-        setEmailError("유효하지 않은 이메일입니다.");
+        setUsernameError("유효하지 않은 아이디(이메일)입니다.");
       }
     }).finally(e => {
       setIsLoading(false);
@@ -47,28 +47,28 @@ export default function FindPassword() {
   }
 
   if (sendEmail) {
-    return <SendResetPassword username={username} email={email}/>
+    return <SendResetPassword name={name} username={username}/>
   } else {
     return (
       <div className={"CenterForm"}>
         <Shortcut/>
         <form>
-          <FormControl label="아이디" error={usernameError}>
+          <FormControl label="이름" error={nameError}>
+            <Input
+              id="name"
+              value={name}
+              onChange={event => setName(event.currentTarget.value)}
+              placeholder="이름을 입력해주세요."
+              maxLength="20"
+            />
+          </FormControl>
+          <FormControl label="아이디(이메일)" error={usernameError}>
             <Input
               id="username"
               value={username}
               onChange={event => setUsername(event.currentTarget.value)}
-              placeholder="아이디를 입력해주세요."
+              placeholder="아이디(이메일)를 입력해주세요."
               maxLength="20"
-            />
-          </FormControl>
-          <FormControl label="이메일" error={emailError}>
-            <Input
-              id="email"
-              value={email}
-              onChange={event => setEmail(event.currentTarget.value)}
-              placeholder="이메일을 입력해주세요."
-              maxLength="30"
             />
           </FormControl>
         </form>

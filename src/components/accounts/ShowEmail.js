@@ -15,7 +15,7 @@ export default function ShowEmail(props) {
         title={props.username}
         kind={KIND.positive}
       >
-        🎉 아이디 찾기에 성공했어요 🎉 <br/>
+        🎉 아이디(이메일) 찾기에 성공했어요 🎉 <br/>
       </Banner>
     </div>
     <Block marginBottom="scale500"/>

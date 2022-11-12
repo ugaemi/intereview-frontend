@@ -38,9 +38,8 @@ export default function VerificationPhone(props) {
   function sendPhoneVerificationCode() {
     setIsLoading(true);
     return accountAction.findUsername({
-      "platform": "phone",
       "name": props.name,
-      "platform_data": props.phone,
+      "phone": props.phone,
     }).then(res => {
       setMinutes(5);
       setSeconds(0);
@@ -53,8 +52,7 @@ export default function VerificationPhone(props) {
 
   function verificationCode() {
     return accountAction.verificationCodeForUsername({
-      "platform": "phone",
-      "platform_data": props.phone,
+      "phone": props.phone,
       "code": values.join(""),
     }).then(res => {
       setUsername(res.data["username"]);

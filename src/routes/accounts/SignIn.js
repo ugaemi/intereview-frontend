@@ -11,7 +11,6 @@ import {authAtom} from "../../_state/Auth";
 import {useAuthAction} from "../../_actions/Auth";
 import Shortcut from "../../components/Shortcut";
 import {clearErrors, showErrors} from "../../utils/Errors";
-import GoogleLoginButton from "../../components/accounts/GoogleLoginButton";
 
 
 export default function SignIn() {
@@ -20,10 +19,7 @@ export default function SignIn() {
   const [password, setPassword] = useState("");
   const [usernameError, setUsernameError] = useState("");
   const [passwordError, setPasswordError] = useState("");
-  // eslint-disable-next-line
-  const [auth, setAuth] = useRecoilState(authAtom);
   const authAction = useAuthAction();
-  console.log(auth);
 
   const fieldErrors = {
     "username": setUsernameError,
@@ -44,13 +40,13 @@ export default function SignIn() {
     <div className={"CenterForm"}>
       <Shortcut/>
       <form>
-        <FormControl label="아이디" error={usernameError}>
+        <FormControl label="아이디(이메일)" error={usernameError}>
           <Input
             id="username"
             value={username}
             onChange={event => setUsername(event.currentTarget.value)}
-            placeholder="아이디를 입력해주세요."
-            maxLength="30"
+            placeholder="아이디(이메일)를 입력해주세요."
+            maxLength="40"
           />
         </FormControl>
         <FormControl label="비밀번호" error={passwordError}>
@@ -74,7 +70,7 @@ export default function SignIn() {
         textAlign: "right",
       })}>
         <Link to={"/accounts/find"}>
-          아이디/비밀번호가 생각이 안나요
+          아이디(이메일)/비밀번호가 생각이 안나요
         </Link>
       </div>
       <Block marginBottom="scale500"/>

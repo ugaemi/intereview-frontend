@@ -21,7 +21,7 @@ export default function CareerManagement() {
   const [css] = useStyletron();
 
   function searchCompany() {
-    setCompanyList(<Spinner/>);
+    setCompanyList(<Spinner className={css({marginLeft: "45%"})}/>);
     careerAction.searchCompany(companyKeyword, 1).then(res => {
       if (res.data) {
         setCompanyList(res.data.map((company) =>
@@ -38,12 +38,12 @@ export default function CareerManagement() {
                       onClick={event => changeCompanyName(event)}>선택</Button>
             )}
           >
-            <ListItemLabel>{company["name"]}</ListItemLabel>
+            <ListItemLabel description={company["address"]}>{company["name"]}</ListItemLabel>
           </ListItem>
           </ul>
         ));
       } else {
-        setCompanyList(<h3>검색 결과가 없어요 🥲</h3>);
+        setCompanyList(<h3 align={"center"}>검색 결과가 없어요 🥲</h3>);
       }
     });
   }

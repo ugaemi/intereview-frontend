@@ -3,6 +3,7 @@ import axios from "axios";
 export function useCareerAction() {
   return {
     fetchSimpleCareer,
+    searchCompany,
   }
 
   function fetchSimpleCareer() {
@@ -11,9 +12,9 @@ export function useCareerAction() {
     );
   }
 
-  function searchCompany() {
+  function searchCompany(keyword, page) {
     return axios.get(
-      "/api/v1/career/company/search",
+      "/api/v1/career/search/company/?keyword=" + keyword + "&page=" + page,
     )
   }
 }

@@ -6,8 +6,6 @@ import {Block} from "baseui/block";
 import {useState} from "react";
 import {Link} from "react-router-dom";
 import "./SignIn.css";
-import {useRecoilState} from "recoil";
-import {authAtom} from "../../_state/Auth";
 import {useAuthAction} from "../../_actions/Auth";
 import Shortcut from "../../components/Shortcut";
 import {clearErrors, showErrors} from "../../utils/Errors";

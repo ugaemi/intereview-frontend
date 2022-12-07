@@ -1,6 +1,6 @@
 import * as React from "react";
 import {AppNavBar, setItemActive} from "baseui/app-nav-bar";
-import {useAuthAction} from "../_actions/Auth";
+import {useAuthAction} from "../actions/Auth";
 import {useNavigate} from "react-router-dom";
 
 export default function Header(props) {

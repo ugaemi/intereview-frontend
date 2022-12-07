@@ -5,7 +5,7 @@ import {useEffect, useState} from "react";
 import {Block} from "baseui/block";
 import "../../components/accounts/Verification.css";
 import {KIND as BUTTON_KIND} from "baseui/button";
-import {useAccountAction} from "../../_actions/Account";
+import {useAccountAction} from "../../actions/Account";
 
 export default function SendResetPassword(props) {
   const [minutes, setMinutes] = useState(10);

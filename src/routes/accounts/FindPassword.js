@@ -4,7 +4,7 @@ import {useState} from "react";
 import {FormControl} from "baseui/form-control";
 import {Input} from "baseui/input";
 import "./FindAccount.css";
-import {useAccountAction} from "../../_actions/Account";
+import {useAccountAction} from "../../actions/Account";
 import Shortcut from "../../components/Shortcut";
 import SendResetPassword from "../../components/accounts/SendResetPassword";
 

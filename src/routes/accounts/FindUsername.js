@@ -5,7 +5,7 @@ import {FormControl} from "baseui/form-control";
 import {Input} from "baseui/input";
 import "./FindAccount.css";
 import {COUNTRIES, PhoneInput} from "baseui/phone-input";
-import {useAccountAction} from "../../_actions/Account";
+import {useAccountAction} from "../../actions/Account";
 import Shortcut from "../../components/Shortcut";
 import VerificationPhone from "../../components/accounts/VerificationForPhone";
 

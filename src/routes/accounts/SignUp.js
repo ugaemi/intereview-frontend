@@ -6,7 +6,7 @@ import {useState} from "react";
 import "./SignIn.css";
 import Shortcut from "../../components/Shortcut";
 import {COUNTRIES, PhoneInput} from "baseui/phone-input";
-import {useAccountAction} from "../../_actions/Account";
+import {useAccountAction} from "../../actions/Account";
 import {clearErrors, showErrors} from "../../utils/Errors";
 import {Banner, KIND} from "baseui/banner";
 import {Link} from "react-router-dom";

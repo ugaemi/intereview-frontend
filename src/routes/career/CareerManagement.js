@@ -7,7 +7,7 @@ import {Search} from "baseui/icon";
 import {Modal, ModalBody, ModalHeader, ROLE, SIZE} from "baseui/modal";
 import {Block} from "baseui/block";
 import {Button} from "baseui/button";
-import {useCareerAction} from "../../_actions/Career";
+import {useCareerAction} from "../../actions/Career";
 import {useStyletron} from "baseui";
 import {ListItem, ListItemLabel} from "baseui/list";
 import {Spinner} from "baseui/spinner";

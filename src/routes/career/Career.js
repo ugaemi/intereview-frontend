@@ -1,7 +1,7 @@
 import React, {useEffect} from "react";
 import {FlexGrid, FlexGridItem} from "baseui/flex-grid";
 import {Mobile, PC} from "../../utils/MediaQuery";
-import {useCareerAction} from "../../_actions/Career";
+import {useCareerAction} from "../../actions/Career";
 
 
 export default function Career() {

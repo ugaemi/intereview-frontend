@@ -4,11 +4,14 @@ import {useStyletron} from "baseui";
 import {Button} from "baseui/button";
 import {Block} from "baseui/block";
 import {useState} from "react";
-import {Link} from "react-router-dom";
+import {Link, useNavigate} from "react-router-dom";
 import "./SignIn.css";
-import {useAuthAction} from "../../_actions/Auth";
+import {useAuthAction} from "../../actions/Auth";
 import Shortcut from "../../components/Shortcut";
 import {clearErrors, showErrors} from "../../utils/Errors";
+import axios from "axios";
+import { useRecoilState } from "recoil";
+import { authAtom } from "../../state/Auth";
 
 
 export default function SignIn() {
@@ -18,6 +21,8 @@ export default function SignIn() {
   const [usernameError, setUsernameError] = useState("");
   const [passwordError, setPasswordError] = useState("");
   const authAction = useAuthAction();
+  const [auth, setAuth] = useRecoilState(authAtom);
+  const navigate = useNavigate();
 
   const fieldErrors = {
     "username": setUsernameError,
@@ -29,7 +34,12 @@ export default function SignIn() {
     formData.append("username", username);
     formData.append("password", password);
     clearErrors(fieldErrors);
-    return authAction.signIn(formData).catch(e => {
+    return authAction.signIn(formData).then(res => {
+      localStorage.setItem("refresh", res.data["refresh_token"]);
+      axios.defaults.headers.common["Authorization"] = res.data["token_type"] + ` ` + res.data["access_token"];
+      setAuth(res.data);
+      navigate("/", {replace: true});
+    }).catch(e => {
       showErrors(e.response.data.detail, fieldErrors);
     });
   }

@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from "react";
 import {FormControl} from "baseui/form-control";
 import {Input} from "baseui/input";
-import {useProfileAction} from "../../_actions/Profile";
+import {useProfileAction} from "../../actions/Profile";
 import {FlexGrid, FlexGridItem} from "baseui/flex-grid";
 
 

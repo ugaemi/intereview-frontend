@@ -3,7 +3,6 @@ import {FormControl} from "baseui/form-control";
 import {Input} from "baseui/input";
 import {useProfileAction} from "../../actions/Profile";
 import {FlexGrid, FlexGridItem} from "baseui/flex-grid";
-import {Avatar} from "baseui/avatar";
 
 
 export default function Profile() {

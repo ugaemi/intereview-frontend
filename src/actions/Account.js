@@ -51,7 +51,7 @@ export function useAccountAction() {
 
   function fetchBaseData() {
     return axios.get(
-      "/api/v1/accounts",
+      "/api/v1/accounts/",
     )
   }
 
